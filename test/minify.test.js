@@ -184,6 +184,5 @@ test('Webpack 5 stats', async () => {
 		};
 	});
 
-	console.log(stats.toString());
 	expect(stats.toString().includes('[minimized]')).toBe(true);
 });
