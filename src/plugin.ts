@@ -1,15 +1,13 @@
-const esbuild = require('esbuild');
+import { startService } from 'esbuild';
+import { Compiler } from './interfaces';
 
 class ESBuildPlugin {
-	/**
-   * @param {import('webpack').Compiler} compiler
-   */
-	apply(compiler) {
+	apply(compiler: Compiler) {
 		let watching = false;
 
-		const startService = async () => {
+		const safeStartService = async () => {
 			if (!compiler.$esbuildService) {
-				compiler.$esbuildService = await esbuild.startService();
+				compiler.$esbuildService = await startService();
 			}
 		};
 
@@ -20,12 +18,12 @@ class ESBuildPlugin {
 		});
 
 		compiler.hooks.run.tapPromise('esbuild', async () => {
-			await startService();
+			await safeStartService();
 		});
 
 		compiler.hooks.watchRun.tapPromise('esbuild', async () => {
 			watching = true;
-			await startService();
+			await safeStartService();
 		});
 
 		compiler.hooks.done.tap('esbuild', () => {
@@ -37,4 +35,4 @@ class ESBuildPlugin {
 	}
 }
 
-module.exports = ESBuildPlugin;
+export default ESBuildPlugin;
