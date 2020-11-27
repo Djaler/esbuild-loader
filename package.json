@@ -1,5 +1,5 @@
 {
-  "name": "esbuild-loader",
+  "name": "@djaler/esbuild-loader",
   "version": "0.0.0-semantic-release",
   "description": "⚡️ Speed up your Webpack build with esbuild",
   "keywords": [
@@ -10,8 +10,11 @@
     "esnext"
   ],
   "license": "MIT",
-  "repository": "privatenumber/esbuild-loader",
+  "repository": "djaler/esbuild-loader",
   "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "lib"
   ],
